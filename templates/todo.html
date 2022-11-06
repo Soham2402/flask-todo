@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Manage landing page</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static',filename='dist/output.css')}}" />
+    </head>
+    <body class="box-border bg-primaryBlack">
+    <div class="flex flex-col justify-center items-center text-white">
+
+        <div class="p-8 ">
+            <form action="/add" method="post" class="flex md:flex-row flex-col md:space-x-16 rounded justify-evenly items-center grow">
+                <a href="/download" class="bg-primaryGreen md:px-8 md:py-16 py-8 px-16 rounded-full font-bold text-lg grow text-center md:mb-0 mb-8">Log</a>
+                <div class="flex flex-col gap-4">
+                    <input type="text" name="title" id="" placeholder="What are you going to do?" size="120" class="w-full appearance-none py-4 rounded-3xl px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-secondaryBlack">
+                    <textarea name="disc" id="" placeholder="Be more precise!" class="hover:resize resize-none w-full appearance-none py-4 rounded-3xl px-4 text-white leading-tight focus:outline-none focus:shadow-outline bg-secondaryBlack"></textarea>
+                </div>
+                <button type="submit" class="grow bg-primaryRed mt-8 md:mt-0 hover:bg-brightRedLight md:px-8 md:py-16 py-8 px-16 text-lg rounded-full ease-in-out duration-200 font-bold">Add</button>
+            </form>
+        </div>
+        <div>
+
+    {%for item in todo%}
+        <div class="flex flex-col content-start bg-secondaryBlack px-16 py-8 rounded-3xl justify-center items-center mb-4 mx-6 ">
+            <span class="text-xl font-bold mb-4">{{item.title}}</span>
+            {%if item.disc%}
+            <span class="text-lg mb-4 max-w-5xl">{{item.disc}}</span>
+            {%endif%}
+            {%if item.completed == True%}
+            <span class="text-lg font-semibold md:mb-4 bg-primaryGreen px-20 py-4 md:px-12 md:py-2 rounded-3xl md:rounded-xl">Completed</span>
+            <div class="flex flex-row space-x-2">
+                <a href="/update/{{item.id}}" class = "bg-primaryRed mt-8 md:mt-0 hover:bg-brightRedLight px-12 py-4 md:px-12 md:py-2 rounded-full ease-in-out duration-200 font-semibold">Update</a>
+                <a href="/delete/{{item.id}}"  class = "bg-primaryRed mt-8 md:mt-0 hover:bg-brightRedLight  px-12 py-4 md:px-12 md:py-2 rounded-full ease-in-out duration-200 font-semibold">Delete</a>
+            </div>
+            {%else%}
+            <span class="text-lg font-semibold md:mb-4 bg-primaryRed px-20 py-4 md:px-12 md:py-2 rounded-3xl md:rounded-xl">Pending</span>
+            <div class="flex flex-row space-x-2">
+                <a href="/update/{{item.id}}" class = "bg-primaryGreen mt-8 md:mt-0 hover:bg-brightRedLight px-12 py-4 md:px-12 md:py-2 rounded-full ease-in-out duration-200 font-semibold">Update</a>
+                <a href="/delete/{{item.id}}"  class = "bg-primaryRed mt-8 md:mt-0 hover:bg-brightRedLight  px-12 py-4 md:px-12 md:py-2 rounded-full ease-in-out duration-200 font-semibold">Delete</a>
+            </div>
+            {%endif%}
+        </div>
+    {%endfor%}
+    </div>
+
+         <script src="" async defer></script>
+    </body>
+</html>
